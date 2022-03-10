@@ -78,6 +78,11 @@ type RolloutSpec struct {
 	RestartAt *metav1.Time `json:"restartAt,omitempty" protobuf:"bytes,9,opt,name=restartAt"`
 	// Analysis configuration for the analysis runs to retain
 	Analysis *AnalysisRunStrategy `json:"analysis,omitempty" protobuf:"bytes,11,opt,name=analysis"`
+	// Knob whether dynamically set pod labels are supported. If this is not the case,
+	// the controller can validate and enforces that all necessary labels are already populated by the
+	// pod's template specification.
+	// +optional
+	SupportDynamicPodLabels bool `json:"supportDynamicPodLabels,omitempty" protobuf:"bool,13,opt,name=supportDynamicPodLabels"`
 }
 
 func (s *RolloutSpec) SetResolvedSelector(selector *metav1.LabelSelector) {
